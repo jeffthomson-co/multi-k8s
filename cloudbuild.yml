@@ -1,0 +1,30 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/neural-aquifer-237313/react-test', '-f', './client/Dockerfile.dev', './client']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['run', '-e', 'CI=true', 'gcr.io/neural-aquifer-237313/react-test', 'npm', 'test']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/neural-aquifer-237313/multi-client', './client']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/neural-aquifer-237313/multi-nginx', './nginx']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/neural-aquifer-237313/multi-server', './server']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/neural-aquifer-237313/multi-worker', './worker']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/neural-aquifer-237313/multi-client']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/neural-aquifer-237313/multi-nginx']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/neural-aquifer-237313/multi-server']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/neural-aquifer-237313/multi-worker']
