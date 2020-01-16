@@ -17,7 +17,7 @@ before_install:
   - gcloud config set project neural-aquifer-237313
   - gcloud config set compute/zone europe-west2-a
   - gcloud container clusters get-credentials multi-k8s
-  - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD"
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
   - docker build -t jeffthomson5150/react-test -f ./client/Dockerfile.dev ./client/Dockerfile.dev
 
 script:
